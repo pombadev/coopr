@@ -1,5 +1,4 @@
-# Welcome to coopr
-coopr [![Crates.io](https://img.shields.io/crates/v/coopr)](https://crates.io/crates/coopr) ![License](https://img.shields.io/crates/l/coopr)
+# Welcome to coopr [![Crates.io](https://img.shields.io/crates/v/coopr)](https://crates.io/crates/coopr) ![License](https://img.shields.io/crates/l/coopr)
 
 > prettier dnf copr helper, search and install copr projects
 
