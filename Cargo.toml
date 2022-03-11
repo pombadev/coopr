@@ -1,7 +1,7 @@
 [package]
 authors = ["pjmp"]
 categories = ["command-line-utilities"]
-description = "prettier dnf copr helper, search and install copr projects"
+description = "prettier dnf copr helper, search and install copr packages"
 edition = "2021"
 exclude = ["py/*", "dist/*", "pyproject.toml"]
 homepage = "https://github.com/pjmp/coopr"
@@ -11,7 +11,7 @@ name = "coopr"
 readme = "README.md"
 repository = "https://github.com/pjmp/coopr"
 resolver = "2"
-version = "0.1.0"
+version = "0.2.0"
 
 [dependencies]
 colored = "2.0.0"

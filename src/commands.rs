@@ -68,37 +68,42 @@ pub(crate) fn search(query: &str) -> Result<(), Box<dyn Error>> {
             );
 
             let description = {
-                let header = "\n\nDescription:".bold().underline();
-
                 let desc = description.trim();
+                let instructions = instructions.trim();
 
-                if desc.is_empty() {
-                    format!("{header} {na}")
-                } else {
-                    let instructions = instructions.trim();
-
-                    if instructions.is_empty() {
-                        format!("{header}\n{desc}")
+                format!(
+                    "{} {}{}",
+                    "\n\nDescription".bold().underline(),
+                    if desc.is_empty() {
+                        na.to_string()
                     } else {
-                        format!(
-                            "{header}\n{desc}\n\n{}\n{instructions}",
-                            "Instruction:".bold().underline()
-                        )
+                        "\n".to_string() + desc
+                    },
+                    if instructions.is_empty() {
+                        "".to_string()
+                    } else {
+                        format!("\n\n{}\n{instructions}", "Instruction".bold().underline())
                     }
-                }
+                )
             };
 
             let support = {
                 // Support
                 //     Contact: {contact}
                 //     Homepage: {homepage}
-                let header = "\n\nSupport:".bold().underline();
+                //     Project: https://copr.fedorainfracloud.org/coprs/<>
+                let header_with_default_link = format!(
+                    "\n\n{}\n  Project - https://copr.fedorainfracloud.org/coprs/{full_name}\n",
+                    "Support".bold().underline()
+                );
 
                 match (contact, homepage) {
-                    (None, None) => format!("{header} {na}\n"),
-                    (None, Some(h)) => format!("{header}\n  Homepage - {h}\n"),
-                    (Some(c), None) => format!("{header}\n  Contact - {c}\n"),
-                    (Some(c), Some(h)) => format!("{header}\n  Homepage - {h}\n  Contact - {c}\n"),
+                    (None, None) => header_with_default_link,
+                    (None, Some(h)) => format!("{header_with_default_link}  Homepage - {h}\n"),
+                    (Some(c), None) => format!("{header_with_default_link}  Contact - {c}\n"),
+                    (Some(c), Some(h)) => {
+                        format!("{header_with_default_link}  Homepage - {h}\n  Contact - {c}\n")
+                    }
                 }
             };
 
